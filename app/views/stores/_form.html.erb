@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <%= render "shared/errors", obj:@store %>
+      <%= form_with(model: @store, class: "shadow p-3 mb-3 bg-info rounded", local: true) do |f|%>
+        <div class="form-group row">
+          <%= f.label :name, class: "col-2 col-form-label text-light" %>
+          <div class="col-10">
+            <%= f.text_field :name, class:"form-control shadow rounded", placeholder:"Name of store"  %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :street, class: "col-2 col-form-label text-light" %> <br>
+          <div class="col-10">
+            <%= f.text_field :street,  class:"form-control shadow rounded", placeholder:"Street of store" %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :number, class: "col-2 col-form-label text-light" %>
+          <div class="col-10">
+            <%= f.text_field :number, class:"form-control shadow rounded", placeholder:"Number of store"  %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :zip_code, class: "col-2 col-form-label text-light" %>
+          <div class="col-10">
+            <%= f.text_field :zip_code, class:"form-control shadow rounded", placeholder:"Zip code of store"  %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :city, class: "col-2 col-form-label text-light" %>
+          <div class="col-10">
+            <%= f.text_field :city, class:"form-control shadow rounded", placeholder:"City of store"  %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :country, class: "col-2 col-form-label text-light" %>
+          <div class="col-10">
+            <%= f.text_field :country, class:"form-control shadow rounded", placeholder:"Country of store"  %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <%= f.label :products, class: "col-2 col-form-label text-light" %>
+            <div class="col-sm-8 col-sm-offset-2" style="padding-top: 10px">
+              <%= f.collection_check_boxes :product_ids, Product.all, :id, :name do |cb| %>
+                <% cb.label(class: "checkbox-inline input_checkbox") {cb.check_box(class: "checkbox") + cb.text }%>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row justify-content-center">
+          <%= f.submit class:"btn btn-outline-light btn-lg"  %>
+        </div>
+        <%end %>
+    </div>
+    <%= link_to '[Cancel and return to stores listing]', stores_path, class: "text-info" %>
+
+  </div>
+
+</div>

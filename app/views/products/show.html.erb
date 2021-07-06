@@ -1,0 +1,30 @@
+<h1 class="text-center mt-4">Product: <%= @product.name %></h1>
+
+<% if logged_in? && current_user.admin? %>
+  <div class="text-center mt-4">
+    <%= link_to "Edit product", edit_product_path(@product), class: "btn btn-outline-info" %>
+  </div>
+<% end %>
+
+<br>
+<div class="card text-center shadow mb-5 bg-white rounded">
+  <div class="card-body">
+    <p class="card-text"><strong>Color: </strong><%= truncate(@product.color, length: 100) %></p>
+    <p class="card-text"><strong>Size: </strong><%= truncate(@product.size, length: 100) %></p>
+    <p class="card-text"><strong>Price: </strong>$<%= truncate(@product.price, length: 100) %></p>
+    <p class="card-text"><strong>Category: </strong><%= @product.category.name %></p>
+
+  </div>
+</div>
+
+<h3 class="text-center mt-4">Stores</h3>
+
+<div class="flickr_pagination">
+  <%= will_paginate @stores, :container => false %>
+</div>
+
+<%= render 'stores/store' %>
+
+<div class="flickr_pagination mb-4">
+  <%= will_paginate @stores , :container => false %>
+</div>

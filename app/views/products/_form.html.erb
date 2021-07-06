@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <%= render "shared/errors", obj:@product %>
+      <%= form_with(model: @product, class: "shadow p-3 mb-3 bg-info rounded", local: true) do |f|%>
+        <div class="form-group row">
+          <%= f.label :name, class: "col-2 col-form-label text-light" %>
+          <div class="col-10">
+            <%= f.text_field :name, class:"form-control shadow rounded", placeholder:"Enter a name"  %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :color, class: "col-2 col-form-label text-light" %> <br>
+          <div class="col-10">
+            <%= f.text_field :color,  class:"form-control shadow rounded", placeholder:"Enter color" %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :size, class: "col-2 col-form-label text-light" %> <br>
+          <div class="col-10">
+            <%= f.text_field :size,  class:"form-control shadow rounded", placeholder:"Enter size" %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :price, class: "col-2 col-form-label text-light" %> <br>
+          <div class="col-10">
+            <%= f.text_field :price,  class:"form-control shadow rounded", placeholder:"Enter price" %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :category, class: "col-2 col-form-label text-light" %>
+          <div class="col-10" style="padding-top: 5px">
+            <%= f.collection_select(:category_id, Category.all, :id, :name,
+                                    {class: "custom-select shadow rounded" }) %>
+          </div>
+        </div>
+
+        <div class="form-group row justify-content-center">
+          <%= f.submit class:"btn btn-outline-light btn-lg" %>
+        </div>
+      <%end %>
+    </div>
+    <%= link_to '[Cancel and return to products listing]', products_path, class: "text-info" %>
+
+
+  </div>
+
+</div>

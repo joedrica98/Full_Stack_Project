@@ -1,0 +1,36 @@
+<div class="container">
+  <% @stores.each do |store| %>
+    <div class="row justify-content-md-center">
+      <div class="col-8 mt-4">
+        <div class="card text-center shadow mb-5 bg-white rounded">
+          <div class="card-header font-italic">
+            <% if store.user %>
+              by <%= link_to store.user.username, store_path(store.user) %>
+            <% end %>
+            <% if store.products.any? %>
+              <p class="card-text"><strong>Products: </strong></p>
+              <div class="mt-2"><%= render store.products %></div>
+            <% end %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to store.name, store_path(store), class: "text-success" %></h5>
+            <p class="card-text"><strong>Street: </strong><%= truncate(store.street, length: 100) %></p>
+            <p class="card-text"><strong>Number: </strong><%= truncate(store.number, length: 100) %></p>
+            <p class="card-text"><strong>Zip Code: </strong><%= truncate(store.zip_code, length: 100) %></p>
+            <p class="card-text"><strong>City: </strong><%= truncate(store.city, length: 100) %></p>
+            <p class="card-text"><strong>Country: </strong><%= truncate(store.country, length: 100) %></p>
+            <%= link_to "View", store_path(store), class: "btn btn-outline-success" %>
+            <% if logged_in? && (store.user == current_user || current_user.admin?) %>
+              <%= link_to "Edit", edit_store_path(store), class: "btn btn-outline-info" %>
+              <%= link_to "Delete", store_path(store), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
+            <% end %>
+         </div>
+          <div class="card-footer text-muted">
+            <small>Created <%= time_ago_in_words(store.created_at) %> ago,
+              edited <%= time_ago_in_words(store.updated_at) %> ago</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
